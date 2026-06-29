@@ -103,6 +103,41 @@ export default function Dashboard() {
       {/* Main Grid */}
       <main className="max-w-7xl mx-auto p-6 md:p-8 space-y-8">
         
+        {/* Step-by-Step Setup Guide */}
+        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-2xl shadow-md space-y-4">
+          <div className="flex items-center gap-2">
+            <svg className="w-6 h-6 text-blue-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            <h2 className="text-base font-extrabold">How to Setup Your Custom Domain (Onboarding Guide)</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-blue-100">
+            <div className="bg-white/10 p-4 rounded-xl space-y-2">
+              <span className="font-extrabold text-blue-200 uppercase tracking-wider text-[10px] block">Step 1: Point your Domain DNS</span>
+              <p className="text-xs leading-relaxed">
+                Log into GoDaddy/Cloudflare. Add an <strong>A Record</strong> pointing to Vercel IP: 
+                <code className="bg-black/30 px-1.5 py-0.5 rounded font-mono block mt-1 select-all text-white text-center">76.76.21.21</code>
+              </p>
+            </div>
+
+            <div className="bg-white/10 p-4 rounded-xl space-y-2">
+              <span className="font-extrabold text-blue-200 uppercase tracking-wider text-[10px] block">Step 2: Connect Domain</span>
+              <p className="text-xs leading-relaxed">
+                Type your domain in the <strong>"Connect Custom Domain"</strong> form below and click Register.
+              </p>
+            </div>
+
+            <div className="bg-white/10 p-4 rounded-xl space-y-2">
+              <span className="font-extrabold text-blue-200 uppercase tracking-wider text-[10px] block">Step 3: Setup Chrome Extension</span>
+              <p className="text-xs leading-relaxed">
+                Open extension settings, select "My Backend", and set <strong>Backend URL</strong> to:
+                <code className="bg-black/30 px-1.5 py-0.5 rounded font-mono block mt-1 text-white text-center">https://quicklink-shortener.vercel.app</code>
+              </p>
+            </div>
+          </div>
+        </section>
+        
         {/* Stat Cards */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
