@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "QuickLink Shortener",
+  "version": "1.0.0",
+  "description": "Shorten browser URLs instantly with custom domain options, click history, and QR codes.",
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://is.gd/*",
+    "https://v.gd/*",
+    "https://tinyurl.com/*",
+    "https://api.tinyurl.com/*",
+    "https://api-ssl.bitly.com/*",
+    "https://cutt.ly/*",
+    "https://api.qrserver.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

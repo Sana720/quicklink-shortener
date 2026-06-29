@@ -1,0 +1,380 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #232946;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body.dark-mode {
+  background-color: #121824;
+  color: #f1f3f4;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  color: #3b82f6;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0;
+  color: #232946;
+}
+
+body.dark-mode .logo h1 {
+  color: #f1f3f4;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+body.dark-mode .subtitle {
+  color: #999;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3b82f6;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+  background-color: #e6effe;
+}
+
+body.dark-mode .nav-btn:hover {
+  background-color: #1d2b45;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+}
+
+.btn-outline:hover {
+  background-color: #f9fafb;
+}
+
+body.dark-mode .btn-outline {
+  border-color: #374151;
+  color: #d1d5db;
+}
+
+body.dark-mode .btn-outline:hover {
+  background-color: #1f2937;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+/* Sections */
+.section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .section {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.section h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.section-desc {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 16px 0;
+}
+
+body.dark-mode .section-desc {
+  color: #94a3b8;
+}
+
+/* Services Selector list */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #f3f4f6;
+}
+
+body.dark-mode .services-list {
+  background-color: #111827;
+  border-color: #1f2937;
+}
+
+.service-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+body.dark-mode .service-option {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.service-option:last-child {
+  border-bottom: none;
+}
+
+.service-option input[type="radio"] {
+  accent-color: #3b82f6;
+}
+
+.service-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.service-name {
+  font-weight: 600;
+  color: #232946;
+}
+
+body.dark-mode .service-name {
+  color: #f1f3f4;
+}
+
+.tag {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.tag-popular {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+
+body.dark-mode .tag-popular {
+  background-color: #1e3a8a;
+  color: #60a5fa;
+}
+
+/* Token Input */
+.token-container {
+  background-color: #ffffff;
+  padding: 12px 16px 12px 42px;
+  border-bottom: 1px solid #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+body.dark-mode .token-container {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.token-container.hidden {
+  display: none;
+}
+
+.token-container input {
+  max-width: 300px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  outline: none;
+  background-color: #fff;
+  color: #232946;
+}
+
+body.dark-mode .token-container input {
+  background-color: #111827;
+  border-color: #334155;
+  color: #f1f3f4;
+}
+
+.token-container input:focus {
+  border-color: #3b82f6;
+}
+
+.help-link {
+  font-size: 11px;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.help-link:hover {
+  text-decoration: underline;
+}
+
+/* Preferences List */
+.pref-list, .data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pref-item, .data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pref-label, .data-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.pref-title, .data-title {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #232946;
+}
+
+body.dark-mode .pref-title, body.dark-mode .data-title {
+  color: #f1f3f4;
+}
+
+.pref-desc, .data-desc {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+body.dark-mode .pref-desc, body.dark-mode .data-desc {
+  color: #94a3b8;
+}
+
+/* Switches (Toggles) */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e5e7eb;
+  transition: .2s;
+  border-radius: 34px;
+}
+
+body.dark-mode .slider {
+  background-color: #475569;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .2s;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toggle input:checked + .slider {
+  background-color: #3b82f6;
+}
+
+.toggle input:checked + .slider:before {
+  transform: translateX(16px);
+}

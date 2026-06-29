@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QuickLink - History</title>
+  <link rel="stylesheet" href="history.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <h1>History</h1>
+          <span class="subtitle">Your shortened links</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="options.html" class="nav-btn">Settings</a>
+        <button id="export-btn" class="btn btn-outline">Export CSV</button>
+        <button id="clear-btn" class="btn btn-danger">Delete history</button>
+      </div>
+    </div>
+
+    <!-- History list section -->
+    <div class="section table-responsive">
+      <table id="history-table" class="history-table">
+        <thead>
+          <tr>
+            <th width="50%">Original URL</th>
+            <th width="30%">Short URL</th>
+            <th width="20%">Date & Service</th>
+          </tr>
+        </thead>
+        <tbody id="history-tbody">
+          <!-- Dynamically generated rows -->
+          <tr id="empty-row">
+            <td colspan="3" class="empty-state">
+              No links shortened yet. Try shortening a link in the popup!
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="history.js"></script>
+</body>
+</html>

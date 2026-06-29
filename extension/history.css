@@ -1,0 +1,237 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #232946;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body.dark-mode {
+  background-color: #121824;
+  color: #f1f3f4;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  color: #3b82f6;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0;
+  color: #232946;
+}
+
+body.dark-mode .logo h1 {
+  color: #f1f3f4;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+body.dark-mode .subtitle {
+  color: #999;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3b82f6;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+  background-color: #e6effe;
+}
+
+body.dark-mode .nav-btn:hover {
+  background-color: #1d2b45;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+}
+
+.btn-outline:hover {
+  background-color: #f9fafb;
+}
+
+body.dark-mode .btn-outline {
+  border-color: #374151;
+  color: #d1d5db;
+}
+
+body.dark-mode .btn-outline:hover {
+  background-color: #1f2937;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+/* Sections & Table Layout */
+.section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .section {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.history-table th {
+  background-color: #f9fafb;
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #4b5563;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+body.dark-mode .history-table th {
+  background-color: #111827;
+  color: #94a3b8;
+  border-bottom-color: #334155;
+}
+
+.history-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+body.dark-mode .history-table td {
+  border-bottom-color: #334155;
+}
+
+.history-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Link formats */
+.orig-url {
+  display: block;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #4b5563;
+}
+
+body.dark-mode .orig-url {
+  color: #cbd5e1;
+}
+
+.short-url-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.short-url-link:hover {
+  text-decoration: underline;
+}
+
+.meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.date-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+body.dark-mode .date-text {
+  color: #94a3b8;
+}
+
+.service-badge {
+  font-size: 9px;
+  font-weight: 700;
+  color: #3b82f6;
+  text-transform: uppercase;
+}
+
+/* Empty State styling */
+.empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  color: #9ca3af;
+  font-weight: 500;
+}

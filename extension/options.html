@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QuickLink - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Options Header -->
+    <div class="header">
+      <div class="logo">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        <div>
+          <h1>QuickLink Shortener</h1>
+          <span class="subtitle">Settings</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="history.html" class="nav-btn">View History</a>
+        <button id="save-btn" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+
+    <!-- Section 1: Services Selector -->
+    <div class="section">
+      <h2>URL Shortener Service</h2>
+      <p class="section-desc">Choose which service is used to generate your short links.</p>
+
+      <div class="services-list">
+        <label class="service-option">
+          <input type="radio" name="service" value="custom">
+          <div class="service-info">
+            <span class="service-name">My Backend (Custom Domain)</span>
+          </div>
+        </label>
+        <!-- Custom Backend Details -->
+        <div id="custom-backend-container" class="token-container hidden">
+          <input type="text" id="backend-url" placeholder="Backend URL (e.g. https://myapi.com)">
+          <textarea id="custom-domains-list" placeholder="Enter custom domains (one per line, e.g. ahmad.link)" rows="2" style="width: 100%; max-width: 300px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 10px; font-size: 13px; outline: none; margin-top: 6px;"></textarea>
+        </div>
+
+        <label class="service-option">
+          <input type="radio" name="service" value="tinyurl" checked>
+          <div class="service-info">
+            <span class="service-name">tinyurl.com</span>
+            <span class="tag tag-popular">Popular</span>
+          </div>
+        </label>
+
+        <label class="service-option">
+          <input type="radio" name="service" value="isgd">
+          <div class="service-info">
+            <span class="service-name">is.gd</span>
+          </div>
+        </label>
+
+        <label class="service-option">
+          <input type="radio" name="service" value="vgd">
+          <div class="service-info">
+            <span class="service-name">v.gd</span>
+          </div>
+        </label>
+
+        <label class="service-option">
+          <input type="radio" name="service" value="bitly">
+          <div class="service-info">
+            <span class="service-name">bit.ly</span>
+            <span class="tag tag-popular">Popular</span>
+          </div>
+        </label>
+        <!-- Bitly Token Input -->
+        <div id="bitly-token-container" class="token-container hidden">
+          <input type="text" id="bitly-token" placeholder="API token">
+          <a href="https://bitly.is/accesstoken" target="_blank" class="help-link">How to get an API key</a>
+        </div>
+
+        <label class="service-option">
+          <input type="radio" name="service" value="cuttly">
+          <div class="service-info">
+            <span class="service-name">cutt.ly</span>
+          </div>
+        </label>
+        <!-- Cuttly Token Input -->
+        <div id="cuttly-token-container" class="token-container hidden">
+          <input type="text" id="cuttly-token" placeholder="API token">
+          <a href="https://cutt.ly/edit-profile" target="_blank" class="help-link">How to get an API key</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Preferences -->
+    <div class="section">
+      <h2>Preferences</h2>
+      
+      <div class="pref-list">
+        <div class="pref-item">
+          <div class="pref-label">
+            <span class="pref-title">Auto-copy on open</span>
+            <span class="pref-desc">Shorten and copy the current page URL as soon as the extension icon is clicked.</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="pref-autocopy">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="pref-item">
+          <div class="pref-label">
+            <span class="pref-title">Night mode</span>
+            <span class="pref-desc">Use a dark theme across the popup and settings.</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="pref-darkmode">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="pref-item">
+          <div class="pref-label">
+            <span class="pref-title">Auto-generate QR code</span>
+            <span class="pref-desc">Create a QR code automatically as soon as a URL is shortened.</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="pref-generateqr" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="pref-item">
+          <div class="pref-label">
+            <span class="pref-title">Hide input field</span>
+            <span class="pref-desc">Hide the Long URL input in the popup.</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="pref-hideinput">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Shortcuts & Data -->
+    <div class="section">
+      <h2>Shortcuts & data</h2>
+      
+      <div class="data-list">
+        <div class="data-item">
+          <div class="data-label">
+            <span class="data-title">Keyboard shortcuts</span>
+            <span class="data-desc">Customize the shortcut used to open the extension.</span>
+          </div>
+          <button id="shortcuts-btn" class="btn btn-outline">Change shortcuts</button>
+        </div>
+
+        <div class="data-item">
+          <div class="data-label">
+            <span class="data-title">Shortened URL history</span>
+            <span class="data-desc">Permanently delete every short link saved on this device.</span>
+          </div>
+          <button id="delete-history-btn" class="btn btn-danger">Delete history</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

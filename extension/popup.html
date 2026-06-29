@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="logo">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        <span>QuickLink</span>
+      </div>
+      <div class="nav-links">
+        <a href="history.html" target="_blank" title="History" class="nav-icon-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </a>
+        <a href="options.html" target="_blank" title="Settings" class="nav-icon-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Long URL Field -->
+    <div class="field">
+      <label>Page URL</label>
+      <input type="text" id="long-url" readonly>
+    </div>
+
+    <!-- API Service Selector -->
+    <div class="field">
+      <label>Shortener Service</label>
+      <select id="service-select">
+        <option value="custom">My Backend (Custom Domain)</option>
+        <option value="tinyurl" selected>TinyURL (Most Reliable)</option>
+        <option value="isgd">is.gd (Fast & Free)</option>
+        <option value="vgd">v.gd (With preview page)</option>
+      </select>
+    </div>
+
+    <!-- Custom Domains (Only shown if "My Backend" is selected) -->
+    <div id="domain-field" class="field hidden">
+      <label>Branded Domain</label>
+      <select id="domain-select">
+        <option value="default">yoursite.com/r/ (Default)</option>
+        <option value="ahmad.link">ahmad.link (Custom)</option>
+      </select>
+    </div>
+
+    <!-- Custom Alias (Optional) -->
+    <div id="alias-field" class="field">
+      <label>Custom Alias (Optional)</label>
+      <input type="text" id="custom-alias" placeholder="e.g. promo-2026">
+    </div>
+
+    <!-- Shorten button -->
+    <button id="shorten-btn" class="btn">Shorten Link</button>
+
+    <!-- Results Section -->
+    <div id="result-container" class="result-container hidden">
+      <div class="field">
+        <label>Shortened Link</label>
+        <div class="result-box">
+          <input type="text" id="short-url" readonly>
+          <button id="copy-btn" class="copy-btn">Copy</button>
+        </div>
+      </div>
+
+      <!-- QR Code Section -->
+      <div class="qr-section">
+        <label>QR Code</label>
+        <div class="qr-container">
+          <img id="qr-code" src="" alt="QR Code" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

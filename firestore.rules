@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Short Links Collection
+    match /short_links/{docId} {
+      allow read, create, update: if true;
+      allow delete: if false; // Deny public deletions
+    }
+
+    // Custom Domains Collection
+    match /custom_domains/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null; // Only authenticated users can register domains
+    }
+  }
+}
