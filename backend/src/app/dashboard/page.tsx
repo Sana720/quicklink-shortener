@@ -90,7 +90,7 @@ export default function Dashboard() {
       {/* Header */}
       <header className="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center shadow-sm">
         <div className="flex items-center gap-2">
-          <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
           </svg>
           <span className="font-extrabold text-xl tracking-tight text-slate-900">QuickLink Dashboard</span>
@@ -104,17 +104,17 @@ export default function Dashboard() {
       <main className="max-w-7xl mx-auto p-6 md:p-8 space-y-8">
         
         {/* Step-by-Step Setup Guide */}
-        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-2xl shadow-md space-y-4">
+        <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-2xl shadow-md space-y-4">
           <div className="flex items-center gap-2">
-            <svg className="w-6 h-6 text-blue-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-emerald-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
             </svg>
             <h2 className="text-base font-extrabold">How to Setup Your Custom Domain (Onboarding Guide)</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-blue-100">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-emerald-100">
             <div className="bg-white/10 p-4 rounded-xl space-y-2">
-              <span className="font-extrabold text-blue-200 uppercase tracking-wider text-[10px] block">Step 1: Point your Domain DNS</span>
+              <span className="font-extrabold text-emerald-200 uppercase tracking-wider text-[10px] block">Step 1: Point your Domain DNS</span>
               <p className="text-xs leading-relaxed">
                 Log into GoDaddy/Cloudflare. Add an <strong>A Record</strong> pointing to Vercel IP: 
                 <code className="bg-black/30 px-1.5 py-0.5 rounded font-mono block mt-1 select-all text-white text-center">76.76.21.21</code>
@@ -122,14 +122,14 @@ export default function Dashboard() {
             </div>
 
             <div className="bg-white/10 p-4 rounded-xl space-y-2">
-              <span className="font-extrabold text-blue-200 uppercase tracking-wider text-[10px] block">Step 2: Connect Domain</span>
+              <span className="font-extrabold text-emerald-200 uppercase tracking-wider text-[10px] block">Step 2: Connect Domain</span>
               <p className="text-xs leading-relaxed">
                 Type your domain in the <strong>"Connect Custom Domain"</strong> form below and click Register.
               </p>
             </div>
 
             <div className="bg-white/10 p-4 rounded-xl space-y-2">
-              <span className="font-extrabold text-blue-200 uppercase tracking-wider text-[10px] block">Step 3: Setup Chrome Extension</span>
+              <span className="font-extrabold text-emerald-200 uppercase tracking-wider text-[10px] block">Step 3: Setup Chrome Extension</span>
               <p className="text-xs leading-relaxed">
                 Open extension settings, select "My Backend", and set <strong>Backend URL</strong> to:
                 <code className="bg-black/30 px-1.5 py-0.5 rounded font-mono block mt-1 text-white text-center">https://quicklink-shortener.vercel.app</code>
@@ -147,7 +147,7 @@ export default function Dashboard() {
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">Accumulated Clicks</span>
-            <span className="text-4xl font-extrabold text-blue-600 mt-2">{totalClicks}</span>
+            <span className="text-4xl font-extrabold text-emerald-600 mt-2">{totalClicks}</span>
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between md:col-span-2 lg:col-span-1">
@@ -174,7 +174,7 @@ export default function Dashboard() {
                   placeholder="e.g. userbrand.com"
                   value={newDomain}
                   onChange={(e) => setNewDomain(e.target.value)}
-                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
                   required
                 />
               </div>
@@ -185,7 +185,7 @@ export default function Dashboard() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition duration-200 disabled:opacity-50 text-sm"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition duration-200 disabled:opacity-50 text-sm"
               >
                 {isSubmitting ? 'Registering...' : 'Register Domain'}
               </button>
@@ -238,7 +238,7 @@ export default function Dashboard() {
                             {link.longUrl}
                           </div>
                         </td>
-                        <td className="py-4 text-center font-bold text-blue-600">
+                        <td className="py-4 text-center font-bold text-emerald-600">
                           {link.clicksCount || 0}
                         </td>
                         <td className="py-4 text-right">
