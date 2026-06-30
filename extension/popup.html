@@ -38,16 +38,18 @@
     <div class="field">
       <label>Shortener Service</label>
       <select id="service-select">
-        <option value="custom">My Backend (Custom Domain)</option>
+        <option value="custom">My Backend (Custom Domain) 🔒 PRO</option>
         <option value="tinyurl" selected>TinyURL (Most Reliable)</option>
         <option value="isgd">is.gd (Fast & Free)</option>
         <option value="vgd">v.gd (With preview page)</option>
+        <option value="bitly">Bit.ly (Requires Token) 🔒 PRO</option>
+        <option value="cuttly">Cutt.ly (Requires Token) 🔒 PRO</option>
       </select>
     </div>
 
     <!-- Custom Domains (Only shown if "My Backend" is selected) -->
     <div id="domain-field" class="field hidden">
-      <label>Branded Domain</label>
+      <label>Branded Domain <span class="pro-badge-mini">PRO</span></label>
       <select id="domain-select">
         <option value="default">yoursite.com/r/ (Default)</option>
         <option value="ahmad.link">ahmad.link (Custom)</option>
@@ -56,7 +58,7 @@
 
     <!-- Custom Alias (Optional) -->
     <div id="alias-field" class="field">
-      <label>Custom Alias (Optional)</label>
+      <label>Custom Alias (Optional) <span class="pro-badge-mini">PRO</span></label>
       <input type="text" id="custom-alias" placeholder="e.g. promo-2026">
     </div>
 
@@ -75,10 +77,18 @@
 
       <!-- QR Code Section -->
       <div class="qr-section">
-        <label>QR Code</label>
+        <label>QR Code <span class="pro-badge-mini">PRO</span></label>
         <div class="qr-container">
           <img id="qr-code" src="" alt="QR Code" />
         </div>
+      </div>
+    </div>
+
+    <!-- Upgrade to Pro Banner -->
+    <div id="upgrade-banner" class="upgrade-banner hidden">
+      <div class="banner-title">⚡ Unlock QuickLink Pro</div>
+      <div class="banner-text">Get branded custom domains, custom aliases, QR codes, and click analytics tracking!</div>
+      <a href="options.html" target="_blank" class="banner-btn">Upgrade Now</a>
     </div>
 
     <!-- Footer SaaS Dashboard link -->

@@ -291,3 +291,60 @@ body.dark-mode .dashboard-link {
 body.dark-mode .dashboard-link:hover {
   color: #93c5fd;
 }
+
+/* Premium Pro Styles */
+.pro-badge-mini {
+  background-color: #d1fae5;
+  color: #065f46;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 6px;
+  border: 0.5px solid #10b981;
+  vertical-align: middle;
+}
+body.dark-mode .pro-badge-mini {
+  background-color: #064e3b;
+  color: #a7f3d0;
+  border-color: #10b981;
+}
+
+.upgrade-banner {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 16px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.banner-title {
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.banner-text {
+  font-size: 10px;
+  opacity: 0.9;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.banner-btn {
+  display: inline-block;
+  background-color: white;
+  color: #059669;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: transform 0.2s;
+}
+.banner-btn:hover {
+  transform: scale(1.05);
+}
+.hidden {
+  display: none !important;
+}
+

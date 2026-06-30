@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const domainSelect = document.getElementById("domain-select");
   const customAliasInput = document.getElementById("custom-alias");
 
+  const upgradeBanner = document.getElementById("upgrade-banner");
+
   // 1. Load preferences & apply themes/UI states
   chrome.storage.local.get([
     "service",
@@ -25,9 +27,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     "prefAutocopy",
     "prefDarkmode",
     "prefGenerateqr",
-    "prefHideinput"
+    "prefHideinput",
+    "isPro"
   ], async (settings) => {
     userSettings = settings;
+    const isPro = settings.isPro || false;
 
     // Apply Night Mode Theme
     if (settings.prefDarkmode) {
@@ -39,8 +43,30 @@ document.addEventListener("DOMContentLoaded", async () => {
       longUrlField.style.display = "none";
     }
 
+    // Enforce Freemium / Pro limitations
+    if (!isPro) {
+      // Show upgrade banner
+      if (upgradeBanner) {
+        upgradeBanner.classList.remove("hidden");
+      }
+      
+      // Lock custom alias
+      if (customAliasInput) {
+        customAliasInput.disabled = true;
+        customAliasInput.placeholder = "🔒 Locked (PRO feature)";
+        customAliasInput.style.backgroundColor = "#f3f4f6";
+        customAliasInput.style.cursor = "not-allowed";
+      }
+    }
+
     // Set selected service in dropdown (sync from options page)
-    const activeService = settings.service || "tinyurl";
+    let activeService = settings.service || "tinyurl";
+    
+    // Fallback if free user somehow saved a pro service
+    if (!isPro && ["custom", "bitly", "cuttly"].includes(activeService)) {
+      activeService = "tinyurl";
+    }
+
     if (serviceSelect) {
       serviceSelect.value = activeService;
     }
@@ -49,20 +75,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     toggleDomainField(activeService);
 
     // Populate custom domains select options dynamically (from server or fallback local list)
-    if (settings.backendUrl) {
-      try {
-        const res = await fetch(`${settings.backendUrl}/api/domains`);
-        const data = await res.json();
-        if (data.success && data.domains && data.domains.length > 0) {
-          populateCustomDomains(data.domains);
-        } else {
+    if (isPro) {
+      if (settings.backendUrl) {
+        try {
+          const res = await fetch(`${settings.backendUrl}/api/domains`);
+          const data = await res.json();
+          if (data.success && data.domains && data.domains.length > 0) {
+            populateCustomDomains(data.domains);
+          } else {
+            populateCustomDomains(settings.customDomains || []);
+          }
+        } catch (err) {
           populateCustomDomains(settings.customDomains || []);
         }
-      } catch (err) {
+      } else {
         populateCustomDomains(settings.customDomains || []);
       }
     } else {
-      populateCustomDomains(settings.customDomains || []);
+      populateCustomDomains([]);
     }
 
     // Fetch tab URL
@@ -77,10 +107,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // Watch service selector change to toggle custom domain options visibility
+  // Watch service selector change to toggle custom domain options visibility and enforce Pro checks
   if (serviceSelect) {
     serviceSelect.addEventListener("change", (e) => {
-      toggleDomainField(e.target.value);
+      const selected = e.target.value;
+      const isPro = userSettings.isPro || false;
+
+      if (!isPro && ["custom", "bitly", "cuttly"].includes(selected)) {
+        alert(`The "${e.target.options[e.target.selectedIndex].text.replace("🔒 PRO", "")}" service is a PRO feature. Please activate Pro in settings to unlock.`);
+        serviceSelect.value = "tinyurl";
+        toggleDomainField("tinyurl");
+        return;
+      }
+      toggleDomainField(selected);
     });
   }
 
@@ -231,7 +270,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       shortUrlInput.value = shortUrl;
 
       // 3. QR Code Handling
-      if (userSettings.prefGenerateqr !== false) {
+      const isPro = userSettings.isPro || false;
+      if (isPro && userSettings.prefGenerateqr !== false) {
         qrSection.classList.remove("hidden");
         const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(shortUrl)}`;
         qrCodeImg.src = qrApiUrl;

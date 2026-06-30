@@ -16,11 +16,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const generateqrCheck = document.getElementById("pref-generateqr");
   const hideinputCheck = document.getElementById("pref-hideinput");
 
+  // Premium Activation Inputs
+  const licenseKeyInput = document.getElementById("license-key");
+  const gumroadProductInput = document.getElementById("gumroad-product");
+  const activateBtn = document.getElementById("activate-btn");
+  const proBadge = document.getElementById("pro-badge");
+
   // Keyboard shortcuts button
   const shortcutsBtn = document.getElementById("shortcuts-btn");
   
   // Delete History button
   const deleteHistoryBtn = document.getElementById("delete-history-btn");
+
+  // Helper to update Pro Badge UI
+  function updateProBadge(isPro, planName) {
+    if (isPro) {
+      proBadge.textContent = planName ? `PRO ACTIVE (${planName})` : "PRO ACTIVE";
+      proBadge.className = "badge pro-badge";
+      activateBtn.textContent = "Deactivate";
+      activateBtn.style.backgroundColor = "#ef4444";
+      activateBtn.style.color = "white";
+    } else {
+      proBadge.textContent = "FREE";
+      proBadge.className = "badge free-badge";
+      activateBtn.textContent = "Activate Pro";
+      activateBtn.style.backgroundColor = "";
+      activateBtn.style.color = "";
+    }
+  }
 
   // Load current settings from storage
   chrome.storage.local.get([
@@ -32,7 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
     "prefAutocopy",
     "prefDarkmode",
     "prefGenerateqr",
-    "prefHideinput"
+    "prefHideinput",
+    "isPro",
+    "licenseKey",
+    "gumroadProduct",
+    "planName"
   ], (settings) => {
     // Select Service Radio
     const service = settings.service || "tinyurl";
@@ -47,6 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     cuttlyTokenInput.value = settings.cuttlyToken || "";
     backendUrlInput.value = settings.backendUrl || "";
     customDomainsListInput.value = settings.customDomains ? settings.customDomains.join("\n") : "";
+    
+    // License Key settings
+    licenseKeyInput.value = settings.licenseKey || "";
+    gumroadProductInput.value = settings.gumroadProduct || "hjejk";
+    const isPro = settings.isPro || false;
+    const planName = settings.planName || "";
+    updateProBadge(isPro, planName);
 
     // Preferences
     autocopyCheck.checked = settings.prefAutocopy || false;
@@ -87,6 +121,126 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Activate / Deactivate Pro License Key
+  activateBtn.addEventListener("click", () => {
+    chrome.storage.local.get(["isPro", "licenseKey", "gumroadProduct"], (settings) => {
+      const currentPro = settings.isPro || false;
+      if (currentPro) {
+        // Deactivate & Decrement Uses
+        activateBtn.textContent = "Deactivating...";
+        activateBtn.disabled = true;
+
+        const key = settings.licenseKey;
+        const product = settings.gumroadProduct || "hjejk";
+
+        fetch("https://api.gumroad.com/v2/licenses/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            product_permalink: product,
+            license_key: key,
+            decrement_uses_count: true
+          })
+        }).finally(() => {
+          chrome.storage.local.set({ isPro: false, licenseKey: "", gumroadPurchaseData: null, planName: "" }, () => {
+            licenseKeyInput.value = "";
+            activateBtn.disabled = false;
+            updateProBadge(false);
+            alert("License deactivated. This slot has been freed on Gumroad. You are now on the Free tier.");
+          });
+        });
+      } else {
+        // Activate & Increment Uses
+        const key = licenseKeyInput.value.trim();
+        const product = gumroadProductInput.value.trim() || "hjejk";
+        if (!key) {
+          alert("Please enter your Gumroad License Key.");
+          return;
+        }
+
+        activateBtn.textContent = "Verifying...";
+        activateBtn.disabled = true;
+
+        // Verify with Gumroad API
+        fetch("https://api.gumroad.com/v2/licenses/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            product_permalink: product,
+            license_key: key,
+            increment_uses_count: true
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          activateBtn.disabled = false;
+          if (data.success && data.purchase) {
+            const purchase = data.purchase;
+
+            // 1. Check if the purchase is active, not refunded or chargebacked
+            if (purchase.refunded || purchase.chargebacked) {
+              throw new Error("This license has been refunded or chargebacked.");
+            }
+
+            // 2. Check subscription status (cancelled, failed)
+            if (purchase.subscription_cancelled_at || purchase.subscription_failed_at) {
+              throw new Error("This subscription is cancelled or has failed payment.");
+            }
+
+            // 3. Enforce single device / single user activation limit
+            if (data.uses > 1) {
+              // Automatically decrement count back since this attempt failed
+              fetch("https://api.gumroad.com/v2/licenses/verify", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  product_permalink: product,
+                  license_key: key,
+                  decrement_uses_count: true
+                })
+              });
+              throw new Error("This license key is already active on another device (Single-User Limit Exceeded).");
+            }
+
+            // Extract variant name if present (Method A)
+            let planName = "Pro";
+            if (purchase.variants) {
+              planName = purchase.variants.replace(/.*:\s*/, "");
+            } else if (purchase.variant) {
+              planName = purchase.variant.replace(/.*:\s*/, "");
+            }
+
+            // Save Pro activation data
+            chrome.storage.local.set({
+              isPro: true,
+              licenseKey: key,
+              gumroadProduct: product,
+              gumroadPurchaseData: purchase,
+              planName: planName
+            }, () => {
+              updateProBadge(true, planName);
+              alert("Pro status activated successfully! Thank you for upgrading.");
+            });
+
+          } else {
+            throw new Error(data.message || "Invalid license key.");
+          }
+        })
+        .catch(err => {
+          activateBtn.disabled = false;
+          updateProBadge(false);
+          alert(`Activation failed: ${err.message}`);
+        });
+      }
+    });
+  });
+
   // Save Settings
   saveBtn.addEventListener("click", () => {
     const selectedService = document.querySelector('input[name="service"]:checked').value;
@@ -113,33 +267,41 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    chrome.storage.local.set({
-      service: selectedService,
-      bitlyToken,
-      cuttlyToken,
-      backendUrl,
-      customDomains,
-      prefAutocopy,
-      prefDarkmode,
-      prefGenerateqr,
-      prefHideinput
-    }, () => {
-      // Toggle body dark mode class
-      if (prefDarkmode) {
-        document.body.classList.add("dark-mode");
-      } else {
-        document.body.classList.remove("dark-mode");
-      }
+    chrome.storage.local.get(["isPro"], (settings) => {
+      const isPro = settings.isPro || false;
+      const licenseKey = licenseKeyInput.value.trim();
+      const gumroadProduct = gumroadProductInput.value.trim();
 
-      // Visual feedback
-      const originalText = saveBtn.textContent;
-      saveBtn.textContent = "Saved!";
-      saveBtn.style.backgroundColor = "#10b981"; // Success green
-      
-      setTimeout(() => {
-        saveBtn.textContent = originalText;
-        saveBtn.style.backgroundColor = ""; // Reset
-      }, 1500);
+      chrome.storage.local.set({
+        service: selectedService,
+        bitlyToken,
+        cuttlyToken,
+        backendUrl,
+        customDomains,
+        prefAutocopy,
+        prefDarkmode,
+        prefGenerateqr,
+        prefHideinput,
+        licenseKey,
+        gumroadProduct
+      }, () => {
+        // Toggle body dark mode class
+        if (prefDarkmode) {
+          document.body.classList.add("dark-mode");
+        } else {
+          document.body.classList.remove("dark-mode");
+        }
+
+        // Visual feedback
+        const originalText = saveBtn.textContent;
+        saveBtn.textContent = "Saved!";
+        saveBtn.style.backgroundColor = "#10b981"; // Success green
+        
+        setTimeout(() => {
+          saveBtn.textContent = originalText;
+          saveBtn.style.backgroundColor = ""; // Reset
+        }, 1500);
+      });
     });
   });
 

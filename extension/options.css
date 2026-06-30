@@ -378,3 +378,31 @@ body.dark-mode .slider {
 .toggle input:checked + .slider:before {
   transform: translateX(16px);
 }
+
+/* Premium Freemium Badges */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.free-badge {
+  background-color: #e5e7eb;
+  color: #4b5563;
+}
+.pro-badge {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+body.dark-mode .free-badge {
+  background-color: #374151;
+  color: #d1d5db;
+}
+body.dark-mode .pro-badge {
+  background-color: #064e3b;
+  color: #a7f3d0;
+}
+

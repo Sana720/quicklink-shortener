@@ -14,7 +14,10 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
         </svg>
         <div>
-          <h1>QuickLink Shortener</h1>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h1 style="margin: 0;">QuickLink Shortener</h1>
+            <span id="pro-badge" class="badge free-badge">FREE</span>
+          </div>
           <span class="subtitle">Settings</span>
         </div>
       </div>
@@ -40,6 +43,7 @@
         <div id="custom-backend-container" class="token-container hidden">
           <input type="text" id="backend-url" placeholder="Backend URL (e.g. https://myapi.com)">
           <textarea id="custom-domains-list" placeholder="Enter custom domains (one per line, e.g. ahmad.link)" rows="2" style="width: 100%; max-width: 300px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; padding: 6px 10px; font-size: 13px; outline: none; margin-top: 6px;"></textarea>
+          <a href="https://quicklink-shortener.vercel.app/dashboard" target="_blank" class="help-link" style="display: block; margin-top: 6px;">How to configure DNS for custom domains</a>
         </div>
 
         <label class="service-option">
@@ -88,7 +92,20 @@
           <input type="text" id="cuttly-token" placeholder="API token">
           <a href="https://cutt.ly/edit-profile" target="_blank" class="help-link">How to get an API key</a>
         </div>
+    </div>
+
+    <!-- Section: Premium Activation (Freemium Model) -->
+    <div class="section">
+      <h2>Premium Activation</h2>
+      <p class="section-desc">Unlock branded custom domains, custom aliases, QR codes, and click analytics tracking.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px; max-width: 400px; margin-top: 10px;">
+        <input type="text" id="gumroad-product" placeholder="Gumroad Product Permalink (e.g. hjejk)" style="box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; padding: 8px 12px; font-size: 13px; outline: none;">
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="license-key" placeholder="Enter Gumroad License Key" style="flex: 1; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; padding: 8px 12px; font-size: 13px; outline: none;">
+          <button id="activate-btn" class="btn btn-outline" style="white-space: nowrap; padding: 8px 16px;">Activate Pro</button>
+        </div>
       </div>
+      <p style="font-size: 11px; color: #6b7280; margin-top: 8px;">Don't have a license key? <a href="https://quicklink-shortener.vercel.app/dashboard" target="_blank" style="color: #10b981; font-weight: bold; text-decoration: none;">Upgrade to Pro on the Dashboard</a></p>
     </div>
 
     <!-- Section 2: Preferences -->

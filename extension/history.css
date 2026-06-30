@@ -235,3 +235,31 @@ body.dark-mode .date-text {
   color: #9ca3af;
   font-weight: 500;
 }
+
+/* Pro Lock styling in History */
+.pro-lock-link {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+  background-color: #d1fae5;
+  border: 1px solid #10b981;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.pro-lock-link:hover {
+  background-color: #a7f3d0;
+  transform: scale(1.05);
+}
+body.dark-mode .pro-lock-link {
+  background-color: #064e3b;
+  color: #a7f3d0;
+}
+.clicks-count {
+  font-weight: bold;
+  font-size: 14px;
+  color: #10b981;
+}
+
